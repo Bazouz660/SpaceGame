@@ -1,0 +1,13 @@
+#model
+exhaust -70, 0;
+
+#gun
+cooldown;
+recoil;
+
+#stats
+speed;
+health;
+acceleration;
+shield;
+type;
