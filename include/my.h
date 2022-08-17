@@ -30,6 +30,8 @@
 #define bool int
 #define transparant_red (sfColor){255, 0, 0, 100}
 
+#define COMMENT_CHAR '#'
+
 #define PLAYER_TEAM 0
 #define SMOKE_MAX_VEL 20
 #define MAX_SHIP_NB 10
@@ -143,6 +145,7 @@ typedef struct model_s {
 } model_t;
 
 typedef struct ship_s {
+    char *name;
     model_t *model;
     shield_t shield;
     directions direction;
@@ -334,7 +337,10 @@ char *my_strcat(char *dest, char const *src);
 char *my_strcpy(char *dest, char const *src);
 char *my_strdup(char const *src);
 int my_strcmp(char const *s1, char const *s2);
+int my_strncmp(char const *s1, char const *s2, int n);
+char *rm_str_char(char **str, char *to_remove);
 char **strwar(const char *str, const char *separator);
+int get_arr_len(void const **arr);
 
 // Linked lists
 void add_part(core_t *c, particle_t **head, smoke_emitter_t *emiter);
@@ -402,4 +408,4 @@ void init_player(core_t *c);
 void init_fps_text(core_t *c);
 
 // Loading
-void print_found_files(void);
+void get_valid_shp(void);

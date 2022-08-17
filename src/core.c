@@ -355,20 +355,6 @@ void play_thruster_sound(core_t *c)
     sfSound_setVolume(c->sounds.thruster, volume);
 }
 
-void shoot(core_t *c)
-{
-    projectiles_t *tmp;
-
-    if (c->clock.seconds > c->player->shoot_clock + c->player->model->gun.cooldown) {
-        add_bolt(c, &c->entities.bolts, c->player);
-        c->player->shoot_clock = c->clock.seconds;
-        modulate_sound(c->sounds.blaster);
-        sfSound_play(c->sounds.blaster);
-        c->player->vect.x += cos(deg_to_rad(c->player->angle + 180) * c->player->model->gun.recoil);
-        c->player->vect.y += sin(deg_to_rad(c->player->angle + 180) * c->player->model->gun.recoil);
-    }
-}
-
 sfColor smooth_color(sfColor c1, sfColor c2, double prog)
 {
     float diff_r = c1.r - c2.r;
@@ -706,7 +692,7 @@ int game_loop(void)
     core_t *c = malloc(sizeof(core_t));
 
     init_game(c);
-    print_found_files();
+    get_valid_shp();
     sfRenderWindow_setVerticalSyncEnabled(c->render.window, sfTrue);
     while (sfRenderWindow_isOpen(c->render.window))
         render_game(c);

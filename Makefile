@@ -35,6 +35,7 @@ SRC	=	src/init/init.c	\
 		src/explosion.c	\
 		src/core.c	\
 		src/utils/string.c	\
+		src/utils/get_arr_len.c	\
 		src/utils/itoa.c	\
 		src/utils/random.c	\
 		src/utils/new_sprite.c	\
