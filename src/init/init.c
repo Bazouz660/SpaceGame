@@ -21,16 +21,17 @@ void init_fps_text(core_t *c)
 void init_player(core_t *c)
 {
     ship_t *tmp;
-    c->player = malloc(sizeof(ship_t));
 
     add_ship(c, &c->entities.ships, ((sfVector2f){900, 500}), PLAYER_TEAM, 3, true);
     tmp = c->entities.ships;
     while (tmp != NULL) {
-        if (tmp->player == true) {
+        if (tmp->player == true)
             c->player = tmp;
-        }
         tmp = tmp->next;
     }
+    c->player->name = NULL;
+    c->player->texture_name = NULL;
+    c->player->pos = (sfVector2f){900, 500};
 }
 
 void init_view(core_t *c)
@@ -69,7 +70,8 @@ void init_sounds(core_t *c)
 
 void init_sky(core_t *c)
 {
-    for (int i = 0; i < 200; i++) {
+    for (int i = 0; i < 200; i++)
+    {
         randomise_spawns(c);
         add_star(c, &c->skybox, False);
     }

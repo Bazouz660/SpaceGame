@@ -146,6 +146,7 @@ typedef struct model_s {
 
 typedef struct ship_s {
     char *name;
+    char *texture_name;
     model_t *model;
     shield_t shield;
     directions direction;
@@ -336,6 +337,7 @@ int my_strlen(char const *str);
 char *my_strcat(char *dest, char const *src);
 char *my_strcpy(char *dest, char const *src);
 char *my_strdup(char const *src);
+char *my_strndup(char const *src, int n);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
 char *rm_str_char(char **str, char *to_remove);
@@ -394,6 +396,7 @@ void orbit_target(core_t *c, ship_t *ship, sfVector2f target);
 void avoid_allies(core_t *c, ship_t *ship);
 float find_target(core_t *c, ship_t *ship, sfVector2f target);
 void engage_target(core_t *c, ship_t *ship);
+void free_ship(ship_t *ship);
 
 // Inits
 void init_visualizer(visualizer_t vi);
@@ -408,4 +411,4 @@ void init_player(core_t *c);
 void init_fps_text(core_t *c);
 
 // Loading
-void get_valid_shp(void);
+ship_t **get_valid_shp(core_t *c);

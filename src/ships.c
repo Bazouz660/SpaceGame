@@ -132,9 +132,12 @@ static shield_t create_shield(core_t *c)
 void add_ship(core_t *c, ship_t **head, sfVector2f pos, int team, int type, bool player)
 {
 	static int index = 0;
-	ship_t *nnode;
+	ship_t *nnode = NULL;
 
 	nnode = malloc(sizeof(ship_t));
+
+	nnode->name = NULL;
+	nnode->texture_name = NULL;
 	nnode->index = index;
     nnode->acceleration = 0.5;
     nnode->shoot_clock = 0;
@@ -158,6 +161,16 @@ void add_ship(core_t *c, ship_t **head, sfVector2f pos, int team, int type, bool
 		(*head)->prev = nnode;
 	(*head) = nnode;
 	index++;
+}
+
+void free_ship(ship_t *ship)
+{
+	smoke_emitter_t *tmp = ship->model->exhausts;
+
+    while (tmp != NULL) {
+		del_exhaust(&ship->model->exhausts->parts, tmp->parts);
+		tmp = tmp->next;
+	}
 }
 
 void del_ship(ship_t **head, ship_t *del_node)

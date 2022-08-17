@@ -24,7 +24,7 @@ void add_bolt(core_t *c, projectiles_t **head, ship_t *src)
     sfSprite_setRotation(nnode->sprite, src->angle);
     nnode->vect.x = (cos(deg_to_rad(src->angle)) * 25);
     nnode->vect.y = (sin(deg_to_rad(src->angle)) * 25);
-	nnode->vect = vect_fmult(nnode->vect, 1 + ((vect_mag(src->vect) / 5) * \
+	nnode->vect = vect_fmult(nnode->vect, 1 + ((vect_mag(src->vect) / 20) * \
 	src->direction.forward));
 	nnode->next = (*head);
 	nnode->prev = NULL;

@@ -28,11 +28,10 @@ void zoom(core_t *c)
 void analyse_events(core_t *c)
 {
     while (sfRenderWindow_pollEvent(c->render.window, &c->event)) {
-        if (c->event.type == sfEvtClosed)
-            sfRenderWindow_close(c->render.window);
-        if (sfKeyboard_isKeyPressed(sfKeyEscape))
-            sfRenderWindow_close(c->render.window);
         zoom(c);
+        if (c->event.type == sfEvtClosed ||
+            sfKeyboard_isKeyPressed(sfKeyEscape))
+            sfRenderWindow_close(c->render.window);
     }
 }
 
@@ -692,7 +691,7 @@ int game_loop(void)
     core_t *c = malloc(sizeof(core_t));
 
     init_game(c);
-    get_valid_shp();
+    get_valid_shp(c);
     sfRenderWindow_setVerticalSyncEnabled(c->render.window, sfTrue);
     while (sfRenderWindow_isOpen(c->render.window))
         render_game(c);

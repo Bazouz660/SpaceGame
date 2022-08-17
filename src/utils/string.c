@@ -20,11 +20,26 @@ char *my_strcpy(char *dest, char const *src)
 
 char *my_strdup(char const *src)
 {
-    char *str = malloc(sizeof(char) * (my_strlen(src) + 1));
+    char *str = NULL;
+    int i = 0;
 
-    for (int i = 0; src[i] != '\0'; i++)
+    if (src == NULL)
+        return NULL;
+    str = malloc(sizeof(char) * (my_strlen(src) + 1));
+    for (; src[i] != '\0'; i++)
         str[i] = src[i];
-    str[my_strlen(str)] = '\0';
+    str[i] = '\0';
+    return (str);
+}
+
+char *my_strndup(char const *src, int n)
+{
+    char *str = malloc(sizeof(char) * (n + 1));
+    int i = 0;
+
+    for (; src[i] != '\0' && i < n; i++)
+        str[i] = src[i];
+    str[i] = '\0';
     return (str);
 }
 
@@ -32,6 +47,13 @@ int my_strcmp(char const *s1, char const *s2)
 {
     int i = 0;
 
+
+    if (s1 == NULL && s2 == NULL)
+        return 0;
+    if (s1 == NULL)
+        return (-1);
+    if (s2 == NULL)
+        return (1);
     while (s1[i] == s2[i]) {
         if (s1[i] == '\0' && s2[i] == '\0')
             return (0);
@@ -46,6 +68,13 @@ int my_strncmp(char const *s1, char const *s2, int n)
 {
     int i = 0;
 
+
+    if (s1 == NULL && s2 == NULL)
+        return 0;
+    if (s1 == NULL)
+        return (-1);
+    if (s2 == NULL)
+        return (1);
     while (s1[i] == s2[i]) {
         if ((s1[i] == '\0' && s2[i] == '\0') || i == n - 1)
             return (0);
@@ -59,7 +88,7 @@ int my_strncmp(char const *s1, char const *s2, int n)
 char *rm_str_char(char **str, char *to_remove)
 {
     char *tmp = *str;
-    char *res = malloc(sizeof(char) * (my_strlen(tmp)));
+    char *res = malloc(sizeof(char) * (my_strlen(tmp) + 1));
     int x = 0;
     int found = 0;
 
