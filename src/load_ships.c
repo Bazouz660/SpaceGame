@@ -105,8 +105,13 @@ char **find_files(void)
 void print_found_files(void)
 {
     char **found_files = find_files();
+    char **tmp;
 
     for (int i = 0; found_files[i] != NULL; i++) {
-        printf("file %d : %s\n\n", i, found_files[i]);
+        tmp = strwar(found_files[i], "\n");
+        printf("\n\nfile %d : \n", i);
+        for (int j = 0; tmp[j] != NULL; j++) {
+            printf("line %d : %s\n", j, tmp[j]);
+        }
     }
 }
